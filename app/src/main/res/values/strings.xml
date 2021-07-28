@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AppointMe</string>
+    <string name="checkbox">com.example.appointme.checkbox</string>
+    <string name="username">com.example.appointme.username</string>
+    <string name="password">com.example.appointme.password</string>
+
 </resources>
