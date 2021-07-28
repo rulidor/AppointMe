@@ -10,6 +10,12 @@ public class User {
     private boolean isServiceProvider = false;
     private ServiceProvider serviceProvider;
 
+    public User(String username, String password, String email, boolean isServiceProvider) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.isServiceProvider = isServiceProvider;
+    }
 
     public String getUsername() {
         return username;

@@ -2,6 +2,7 @@ package com.example.appointme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appointme.User.User;
 import com.example.appointme.User.UserController;
 
 import org.w3c.dom.Text;
@@ -80,30 +82,46 @@ public class MainActivity extends AppCompatActivity {
                     editor.commit();
                 }
 
-                checkLoginDetails();
+                User user = checkLoginDetails();
+                if (user != null){
+                    if(user.isServiceProvider() == false){
+                        Intent intent = new Intent(getBaseContext(), MenuClientActivity.class);
+                        intent.putExtra("username", mUsername.getText().toString());
+                        startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(getBaseContext(), MenuServiceProviderActivity.class);
+                        intent.putExtra("username", mUsername.getText().toString());
+                        startActivity(intent);
+                    }
+                }
+
             }
         });
 
         mSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getBaseContext(), RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    private void checkLoginDetails() {
+    private User checkLoginDetails() {
         if (!userController.getUserMap().keySet().contains(mUsername.getText().toString())){
             Toast.makeText(MainActivity.this, "Wrong details",
                     Toast.LENGTH_LONG).show();
-            return;
+            return null;
         }
         if(!userController.getUserMap().get(mUsername.getText().toString()).getPassword().equals(
                 mPassword.getText().toString())) {//wrong password
             Toast.makeText(MainActivity.this, "Wrong details",
                     Toast.LENGTH_LONG).show();
-            return;
+            return null;
         }
+        //case correct details
+        return userController.getUserMap().get(mUsername.getText().toString());
     }
 
     private void checkSharedPreferences(){
