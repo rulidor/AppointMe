@@ -22,27 +22,27 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="316dp"
-        android:text="Is a Provider: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="32dp"
+        android:text="Address: "
+        app:layout_constraintStart_toStartOf="@+id/textView23"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <EditText
-        android:id="@+id/profUsername5"
+        android:id="@+id/becOccupation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/profEmail5"
+        app:layout_constraintEnd_toEndOf="@+id/becFirstName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/profEmail5"
+        app:layout_constraintStart_toStartOf="@+id/becFirstName"
         app:layout_constraintTop_toBottomOf="@+id/txtDashboard" />
 
     <EditText
-        android:id="@+id/profPhoneNumber5"
+        android:id="@+id/becPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -50,13 +50,13 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/profIsProvider5"
+        app:layout_constraintEnd_toEndOf="@+id/becLastName"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/profIsProvider5"
-        app:layout_constraintTop_toBottomOf="@+id/profIsProvider5" />
+        app:layout_constraintStart_toStartOf="@+id/becLastName"
+        app:layout_constraintTop_toBottomOf="@+id/becLastName" />
 
     <EditText
-        android:id="@+id/profEmail5"
+        android:id="@+id/becFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -68,31 +68,31 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/profUsername5" />
+        app:layout_constraintTop_toBottomOf="@+id/becOccupation" />
 
     <EditText
-        android:id="@+id/profIsProvider5"
+        android:id="@+id/becLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/profEmail5"
+        app:layout_constraintEnd_toEndOf="@+id/becFirstName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/profEmail5"
-        app:layout_constraintTop_toBottomOf="@+id/profEmail5" />
+        app:layout_constraintStart_toStartOf="@+id/becFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/becFirstName" />
 
     <EditText
-        android:id="@+id/profIsProvider6"
+        android:id="@+id/becAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/profEmail5"
+        app:layout_constraintEnd_toEndOf="@+id/becFirstName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/profEmail5"
-        app:layout_constraintTop_toBottomOf="@+id/profPhoneNumber5" />
+        app:layout_constraintStart_toStartOf="@+id/becFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/becPhoneNumber" />
 
     <TextView
         android:id="@+id/textView21"
@@ -152,7 +152,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine2"
+        android:id="@+id/becDescription"
         android:layout_width="385dp"
         android:layout_height="190dp"
         android:layout_marginTop="26dp"
@@ -166,13 +166,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnBecomeProvider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="BECOME A PROVIDER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintTop_toBottomOf="@+id/becDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

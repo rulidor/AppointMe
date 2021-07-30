@@ -11,7 +11,11 @@ public class UserController {
     private UserController(){
         userMap = new HashMap<>();
         User admin = new User("admin", "123", "a@gmail.com", false, "1111111111", false);
+        User a = new User("a", "a", "a@gmail.com", false, "2222222222", false);
+
         userMap.put("admin", admin);
+        userMap.put("a", a);
+
     }
 
     public static UserController getInstance()
