@@ -16,8 +16,6 @@ import android.widget.Toast;
 import com.example.appointme.User.User;
 import com.example.appointme.User.UserController;
 
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
@@ -84,16 +82,16 @@ public class MainActivity extends AppCompatActivity {
 
                 User user = checkLoginDetails();
                 if (user != null){
+                    Intent intent = new Intent(getBaseContext(), MenuActivity.class);
+                    intent.putExtra("username", mUsername.getText().toString());
+
                     if(user.isServiceProvider() == false){
-                        Intent intent = new Intent(getBaseContext(), MenuClientActivity.class);
-                        intent.putExtra("username", mUsername.getText().toString());
-                        startActivity(intent);
+                        intent.putExtra("isServiceProvide", false);
                     }
                     else{
-                        Intent intent = new Intent(getBaseContext(), MenuServiceProviderActivity.class);
-                        intent.putExtra("username", mUsername.getText().toString());
-                        startActivity(intent);
+                        intent.putExtra("isServiceProvide", true);
                     }
+                    startActivity(intent);
                 }
 
             }

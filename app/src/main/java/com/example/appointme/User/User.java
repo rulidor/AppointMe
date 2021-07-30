@@ -9,6 +9,7 @@ public class User {
     private String email;
     private boolean isServiceProvider = false;
     private ServiceProvider serviceProvider;
+    private String phone;
 
     public User(String username, String password, String email, boolean isServiceProvider) {
         this.username = username;
