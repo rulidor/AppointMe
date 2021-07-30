@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null){
                     user.setLoggedIn(true);
                     userController.getUserMap().put(user.getUsername(), user);
+
                     Intent intent = new Intent(getBaseContext(), MenuActivity.class);
                     intent.putExtra("username", mUsername.getText().toString());
 
@@ -93,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         intent.putExtra("isServiceProvide", true);
                     }
+
+                    intent.putExtra("username", mUsername.getText().toString());
+
                     startActivity(intent);
                 }
 

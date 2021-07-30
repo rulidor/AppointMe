@@ -9,6 +9,15 @@ public class ServiceProvider {
     private String addrs;
     private String description;
 
+    public ServiceProvider(String occupation, String firstName, String lastName, String phone, String addrs, String description) {
+        this.occupation = occupation;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.addrs = addrs;
+        this.description = description;
+    }
+
     public String getOccupation() {
         return occupation;
     }

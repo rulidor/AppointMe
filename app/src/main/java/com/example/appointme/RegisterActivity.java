@@ -52,25 +52,17 @@ public class RegisterActivity extends AppCompatActivity {
                 if(isCorrectDetails() == false)
                     return;
 
-                if ( isUserAlreadyExist() ){
-                    Toast.makeText(RegisterActivity.this, "Username already exist",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if ( isEmailAlreadyExist() ){
-                    Toast.makeText(RegisterActivity.this, "Email already exist",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 //check the "I agree" check box
                 if( !regCheckBoxIAgree.isChecked() ){
                     Toast.makeText(RegisterActivity.this, "You must agree to terms and conditions in order to continue",
                             Toast.LENGTH_LONG).show();
                     return;
                 }
-                Intent intent = new Intent(getBaseContext(), MenuActivity.class);
-                intent.putExtra("username", regUsername.getText().toString());
+                User user = new User(regUsername.getText().toString(), regPassword.getText().toString(), regEmail.getText().toString(),
+                        false, regPhone.getText().toString(), false);
+                userController.getUserMap().put(regUsername.getText().toString(), user);
+
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -126,6 +118,19 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        //todo: check if these 2 addons are alright:
+        if ( isUserAlreadyExist() ){
+            Toast.makeText(RegisterActivity.this, "Username already exist",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if ( isEmailAlreadyExist() ){
+            Toast.makeText(RegisterActivity.this, "Email already exist",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
 
         //details are ok
         return true;

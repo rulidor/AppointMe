@@ -11,11 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appointme.User.User;
 import com.example.appointme.User.UserController;
 
 public class MenuActivity extends AppCompatActivity {
 
     private UserController userController = UserController.getInstance();
+
+    private User currentUser;
+    private String username;
 
     private ImageView mBtnLogout;
     private LinearLayout layNewAppointment;
@@ -26,11 +30,33 @@ public class MenuActivity extends AppCompatActivity {
 
     private TextView mTxtProviderOrClient;
     private ImageView mImgClientOrProvider;
+    private TextView txtDashboard;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        username = getIntent().getStringExtra("username");
+        if( !username.isEmpty() )
+            currentUser = userController.getUserMap().get(username);
+        boolean isProvider = currentUser.isServiceProvider();
+        if(isProvider){
+            mTxtProviderOrClient.setText("Manage Calendar");
+            mImgClientOrProvider.setImageResource(R.drawable.manage_your_calendar);
+
+        }
+        else{
+            mTxtProviderOrClient.setText("Offer Your Service");
+            mImgClientOrProvider.setImageResource(R.drawable.offer_your_service);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        currentUser = userController.getUserMap().get(getIntent().getStringExtra("username"));
 
         mBtnLogout = (ImageView) findViewById(R.id.mBtnLogout);
         layNewAppointment = (LinearLayout)findViewById(R.id.layNewAppointment);
@@ -41,6 +67,10 @@ public class MenuActivity extends AppCompatActivity {
 
         mTxtProviderOrClient = (TextView) findViewById(R.id.clientOrProvider);
         mImgClientOrProvider = (ImageView) findViewById(R.id.imgClientOrProvider);
+
+        txtDashboard = (TextView) findViewById(R.id.txtDashboard);
+        txtDashboard.setText(txtDashboard.getText().toString() + " - " +this.currentUser.getUsername());
+
 
         boolean isProvider = getIntent().getBooleanExtra("isServiceProvide", false);
         if(isProvider){
@@ -82,7 +112,10 @@ public class MenuActivity extends AppCompatActivity {
         layMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String username = getIntent().getStringExtra("username");
+                Intent intent = new Intent(getBaseContext(), MyProfileActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
             }
         });
 
@@ -96,7 +129,10 @@ public class MenuActivity extends AppCompatActivity {
         layOfferServiceOrManageYours.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String username = getIntent().getStringExtra("username");
+                Intent intent = new Intent(getBaseContext(), BecomeProviderActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
             }
         });
     }
