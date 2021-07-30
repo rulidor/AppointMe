@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/regUsername" />
 
     <EditText
-        android:id="@+id/regPasswordRepeat"
+        android:id="@+id/regRepeatPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -74,7 +74,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regPasswordRepeat" />
+        app:layout_constraintTop_toBottomOf="@+id/regRepeatPassword" />
 
     <EditText
         android:id="@+id/regPhone"
