@@ -2,6 +2,7 @@ package com.example.appointme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,8 +11,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.appointme.User.User;
+import com.example.appointme.User.UserController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private CheckBox mCheckboxPref;
     private TextView mSignup;
+
+    private UserController userController = new UserController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(mUsername.getText().toString().isEmpty() || mPassword.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Username or password cannot be empty",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 //save checkbox preference
                 if(mCheckboxPref.isChecked()){
                     editor.putString(getString(R.string.checkbox), "True");
@@ -68,8 +79,47 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString(getString(R.string.password),"");
                     editor.commit();
                 }
+
+                User user = checkLoginDetails();
+                if (user != null){
+                    Intent intent = new Intent(getBaseContext(), MenuActivity.class);
+                    intent.putExtra("username", mUsername.getText().toString());
+
+                    if(user.isServiceProvider() == false){
+                        intent.putExtra("isServiceProvide", false);
+                    }
+                    else{
+                        intent.putExtra("isServiceProvide", true);
+                    }
+                    startActivity(intent);
+                }
+
             }
         });
+
+        mSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private User checkLoginDetails() {
+        if (!userController.getUserMap().keySet().contains(mUsername.getText().toString())){
+            Toast.makeText(MainActivity.this, "Wrong details",
+                    Toast.LENGTH_LONG).show();
+            return null;
+        }
+        if(!userController.getUserMap().get(mUsername.getText().toString()).getPassword().equals(
+                mPassword.getText().toString())) {//wrong password
+            Toast.makeText(MainActivity.this, "Wrong details",
+                    Toast.LENGTH_LONG).show();
+            return null;
+        }
+        //case correct details
+        return userController.getUserMap().get(mUsername.getText().toString());
     }
 
     private void checkSharedPreferences(){
