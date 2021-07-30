@@ -10,12 +10,31 @@ public class User {
     private boolean isServiceProvider = false;
     private ServiceProvider serviceProvider;
     private String phone;
+    private boolean isLoggedIn;
 
-    public User(String username, String password, String email, boolean isServiceProvider) {
+    public User(String username, String password, String email, boolean isServiceProvider, String phone, boolean isLoggedIn) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.isServiceProvider = isServiceProvider;
+        this.phone = phone;
+        this.isLoggedIn = isLoggedIn;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
     }
 
     public String getUsername() {

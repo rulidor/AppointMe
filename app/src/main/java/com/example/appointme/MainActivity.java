@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox mCheckboxPref;
     private TextView mSignup;
 
-    private UserController userController = new UserController();
+    private UserController userController = UserController.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
                 User user = checkLoginDetails();
                 if (user != null){
+                    user.setLoggedIn(true);
+                    userController.getUserMap().put(user.getUsername(), user);
                     Intent intent = new Intent(getBaseContext(), MenuActivity.class);
                     intent.putExtra("username", mUsername.getText().toString());
 
@@ -115,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
         if(!userController.getUserMap().get(mUsername.getText().toString()).getPassword().equals(
                 mPassword.getText().toString())) {//wrong password
             Toast.makeText(MainActivity.this, "Wrong details",
+                    Toast.LENGTH_LONG).show();
+            return null;
+        }
+        if(userController.getUserMap().get(mUsername.getText().toString()).isLoggedIn()) {//user already logged in
+            Toast.makeText(MainActivity.this, "User already logged in",
                     Toast.LENGTH_LONG).show();
             return null;
         }
