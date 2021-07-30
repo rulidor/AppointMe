@@ -82,7 +82,10 @@ public class MenuActivity extends AppCompatActivity {
         layMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String username = getIntent().getStringExtra("username");
+                Intent intent = new Intent(getBaseContext(), MyProfileActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
             }
         });
 
@@ -96,7 +99,10 @@ public class MenuActivity extends AppCompatActivity {
         layOfferServiceOrManageYours.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String username = getIntent().getStringExtra("username");
+                Intent intent = new Intent(getBaseContext(), BecomeProviderActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
             }
         });
     }
